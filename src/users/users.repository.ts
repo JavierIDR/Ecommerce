@@ -66,8 +66,13 @@ const users: User[] = [
 
 @Injectable()
 export class UsersRepository {
-  async getUsers() {
-    return await users.map(({password, ...rest})=>rest);
+  async getUsers(page: number, limit: number) {
+
+    const start = (page - 1) * limit;
+    const end = start + limit;
+    const userList = users.slice(start, end);
+    
+    return await userList.map(({password, ...rest})=>rest);
   }
 
   async getUserById(id: string) {
@@ -95,5 +100,9 @@ export class UsersRepository {
     if(foundUser === -1) return `No se encontro el usuario con id ${id}`;
     users.splice(foundUser, 1);
     return id;
+  }
+
+  getUserByEmail(email: string) {
+    return users.find((user) => user.email === email);
   }
 }
