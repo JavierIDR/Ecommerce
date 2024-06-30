@@ -66,7 +66,34 @@ const users: User[] = [
 
 @Injectable()
 export class UsersRepository {
-  getUsers() {
-    return users;
+  async getUsers() {
+    return await users.map(({password, ...rest})=>rest);
+  }
+
+  async getUserById(id: string) {
+    const foundUser = users.findIndex((user) => user.id === id);
+    if(foundUser === -1) return `No se encontro el usuario con id ${id}`;
+    const {password, ...rest} = users[foundUser];
+    return rest;
+  }
+
+  async createUser(user: User) {
+    users.push({...user, id: user.email});
+    return user.email;
+  }
+
+  async updateUser(id: string, user: User) {
+    const foundUser = users.findIndex((u) => u.id === id);
+    if(foundUser === -1) return `No se encontro el usuario con id ${id}`;
+    
+    users[foundUser] = {...users[foundUser], ...user};
+    return users[foundUser].id;
+  }
+  
+  async deleteUser(id: string) {
+    const foundUser = users.findIndex((u) => u.id === id);
+    if(foundUser === -1) return `No se encontro el usuario con id ${id}`;
+    users.splice(foundUser, 1);
+    return id;
   }
 }
