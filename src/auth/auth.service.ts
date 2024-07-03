@@ -12,9 +12,9 @@ export class AuthService {
     if(!email || !password) return 'Email y password son requeridos';
     
     const user = this.usersRepository.getUserByEmail(email);
-    if(!user || user.password !== password) {
-      return 'Credenciales incorrectas';
-    }
+    // if(!user || user.password !== password) {
+    //   return 'Credenciales incorrectas';
+    // }
     return "Usuario logueado";
   }
 }
