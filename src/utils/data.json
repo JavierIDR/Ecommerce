@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Iphone 15",
+    "description": "The best smartphone in the world",
+    "price": 199.99,
+    "stock": 12,
+    "category": "smartphone",
+    "imgUrl": "https://via.placeholder.com/300x300.png"
+  },
+  {
+    "name": "Samsung Galaxy S23",
+    "description": "The best smartphone in the world",
+    "price": 150.0,
+    "stock": 12,
+    "category": "smartphone",
+    "imgUrl": "https://via.placeholder.com/300x300.png"
+  },
+  {
+    "name": "Motorola Edge 40",
+    "description": "The best smartphone in the world",
+    "price": 179.89,
+    "stock": 12,
+    "category": "smartphone",
+    "imgUrl": "https://via.placeholder.com/300x300.png"
+  }
+]
