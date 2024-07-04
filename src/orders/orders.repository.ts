@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { OrderDetails } from "src/entities/orderdetails.entity";
 import { Orders } from "src/entities/orders.entity";
@@ -20,7 +20,7 @@ export class OrdersRepository {
 
     const user = await this.usersRepository.findOneBy({ id: userId });
     if(!user) { 
-      return `No se encontro el usuario con id ${userId}`;
+      throw new NotFoundException(`No se encontro el usuario con id ${userId}`);
     }
 
     const order = new Orders();
@@ -33,7 +33,7 @@ export class OrdersRepository {
       products.map(async (element) => {
         const product = await this.productsRepository.findOneBy({ id: element.id });
         if(!product) { 
-          return `No se encontro el producto con id ${element.id}`;
+          throw new NotFoundException(`No se encontro el producto con id ${element.id}`);
         }
         
         total += Number(product.price);
@@ -72,7 +72,7 @@ export class OrdersRepository {
     });
 
     if(!order) { 
-      return `No se encontro la orden con id ${id}`;
+      return new NotFoundException(`No se encontro la orden con id ${id}`);
     }
 
     return order;
