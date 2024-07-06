@@ -1,5 +1,5 @@
 import { PickType } from "@nestjs/swagger";
-import { IsEmail, IsNotEmpty, IsNumber, IsString, Matches, MaxLength, MinLength, Validate } from "class-validator";
+import { IsEmail, IsEmpty, IsNotEmpty, IsNumber, IsString, Matches, MaxLength, MinLength, Validate } from "class-validator";
 import { MatchPassword } from "src/decorators/matchPassword.decorators";
 
 export class CreateUserDto {
@@ -47,6 +47,9 @@ export class CreateUserDto {
   @MinLength(5)
   @MaxLength(20)
   city: string;
+  
+  @IsEmpty()
+  isAdmin?: boolean;
 }
 
 export class LoginUserDto extends PickType(CreateUserDto, ['email', 'password']) {}

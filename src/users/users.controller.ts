@@ -1,6 +1,9 @@
 import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { Roles } from 'src/decorators/roles.decorators';
+import { Role } from './roles.enum';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
 @Controller('users')
 export class UsersController {
@@ -8,7 +11,8 @@ export class UsersController {
     ) {}
 
   @Get() 
-  @UseGuards(AuthGuard)
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard, RolesGuard)
   getUsers(@Query("page") page: string, @Query("limit") limit: string) {
     !page ? (page = "1") : page;
     !limit ? (limit = "5") : limit;
