@@ -1,11 +1,11 @@
 import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
-import { CreateUserDto } from './users.dto';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService,
+    ) {}
 
   @Get() 
   @UseGuards(AuthGuard)
@@ -15,16 +15,10 @@ export class UsersController {
     if (page && limit) return this.usersService.getUsers(Number(page), Number(limit));
   }
   
-  
   @Get(":id")
   @UseGuards(AuthGuard)
   getUser(@Param("id", ParseUUIDPipe) id: string) {
     return this.usersService.getUser(id);
-  }
-
-  @Post()
-  createUser(@Body() user: CreateUserDto) {
-    return this.usersService.createUser(user);
   }
 
   @Put(":id")
