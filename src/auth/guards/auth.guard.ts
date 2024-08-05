@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { Role } from 'src/users/roles.enum';
 
 
-
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private readonly jwtService: JwtService) {}
@@ -14,7 +13,7 @@ export class AuthGuard implements CanActivate {
   ): boolean | Promise<boolean> | Observable<boolean> {
     const request = context.switchToHttp().getRequest();
     const token = request.headers.authorization?.split(' ')[1];
-    if(token) throw new UnauthorizedException('No se envio un token');
+    if(!token) throw new UnauthorizedException('No se envio un token');
 
     try {
       const secret = process.env.JWT_SECRET;
