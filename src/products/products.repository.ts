@@ -62,4 +62,9 @@ export class ProductsRepository {
     return updatedProduct;
 }
 
+  async deleteProduct(id: string) {
+    await this.productsRepository.delete(id);
+    return `Se elimino el producto con id ${id}`;
+  }
+
 }

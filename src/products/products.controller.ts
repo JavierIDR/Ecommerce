@@ -31,8 +31,12 @@ export class ProductsController {
   @Put(':id')
   @Roles(Role.Admin)
   @UseGuards(AuthGuard, RolesGuard)
-  updateProduct(@Param('id') id: string, @Body() product: any) {}
+  updateProduct(@Param('id') id: string, @Body() product: any) {
+    return this.productsService.updateProduct(id, product);
+  }
 
   @Delete(':id')
-  deleteProduct(@Param('id') id: string) {}
+  deleteProduct(@Param('id') id: string) {
+    return this.productsService.deleteProduct(id);
+  }
 }
