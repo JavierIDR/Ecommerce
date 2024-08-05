@@ -27,7 +27,7 @@ export class UsersRepository {
     },
   });
   if(!user) return `No se encontro el usuario con id ${id}`;
-  const { password, ...rest } = user;
+  const { password, isAdmin, ...rest } = user;
   return rest;
 }
 
@@ -36,21 +36,21 @@ export class UsersRepository {
     
     const dbUser = await this.usersRepository.findOneBy({ id: newUser.id });
     
-    const { password, ...rest } = dbUser;
+    const { password, isAdmin, ...rest } = dbUser;
     return rest;
   }
 
   async updateUser(id: string, user: Users) {
     await this.usersRepository.update(id, user);
     const updatedUser = await this.usersRepository.findOneBy({ id });
-    const { password, ...rest } = updatedUser;
+    const { password, isAdmin, ...rest } = updatedUser;
     return rest;
   }
 
   async deleteUser(id: string) {
     const user = await this.usersRepository.findOneBy({ id });
     this.usersRepository.remove(user);
-    const { password, ...rest } = user;
+    const { password, isAdmin, ...rest } = user;
     return rest;
   }
 
