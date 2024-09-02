@@ -35,7 +35,7 @@ export class UsersController {
   updateUser(@Param("id", ParseUUIDPipe) id: string, @Body() user: any) {
     return this.usersService.updateUser(id, user);
   }
-  
+
   @ApiBearerAuth()
   @Delete(":id")
   @UseGuards(AuthGuard)

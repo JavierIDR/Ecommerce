@@ -13,9 +13,17 @@ import { OrderDetails } from "./orderdetails.entity";
   name: "PRODUCTS",
 })
 export class Products {
+  /**
+   * Identificador unico del producto.
+   * uuid v4 generado por la base de datos.
+   */
   @PrimaryGeneratedColumn("uuid")
   id: string;
-
+  
+  /**
+   * Nombre del producto, debe ser único y no puede estar vacío.
+   * @example "Smartphone X"
+   */
   @Column({
     type: "varchar",
     length: 50,
@@ -24,12 +32,20 @@ export class Products {
   })
   name: string;
 
+  /**
+   * Descripción del producto, debe proporcionar detalles relevantes del producto.
+   * @example "Un smartphone de última generación con 128GB de almacenamiento."
+   */
   @Column({
     type: "text",
     nullable: false,
   })
   description: string;
-
+  
+  /**
+   * Precio del producto, debe ser un valor decimal con dos decimales de precisión.
+   * @example 699.99
+   */
   @Column({
     type: "decimal",
     precision: 10,
@@ -37,13 +53,21 @@ export class Products {
     nullable: false,
   })
   price: number;
-
+  
+  /**
+   * Cantidad disponible del producto en stock.
+   * @example 50
+   */
   @Column({
     type: "int",
     nullable: false,
   })
   stock: number;
-
+  
+  /**
+   * URL de la imagen del producto.
+   * @example "https://example.com/images/product.png"
+   */
   @Column({
     type: "text",
   })

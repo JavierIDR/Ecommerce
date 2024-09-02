@@ -24,13 +24,18 @@ export class FileUploadService {
     }
 
     try {
-      const updatedProduct = await this.productsRepository.update(productId, { 
+      await this.productsRepository.update(productId, { 
         imgUrl: response.secure_url,
       });
 
+    const updatedProduct = await this.productsRepository.findOneBy({ id: productId });
+      if (!updatedProduct) {
+        throw new InternalServerErrorException(`Error al obtener el producto actualizado`);
+      }
+
       return updatedProduct;
     } catch (error) {
-      throw new InternalServerErrorException(`Error al actualizar el producto: ${error.message}`);
+      throw new InternalServerErrorException(`Error al actualizar la imagen del producto`);
     }
   }
 }

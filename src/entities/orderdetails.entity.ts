@@ -14,9 +14,18 @@ import { Orders } from "./orders.entity";
   name: "ORDERDETAILS",
 })
 export class OrderDetails {
+
+  /**
+   * Identificador unico de la orden.
+   * uuid v4 generado por la base de datos.
+   */
   @PrimaryGeneratedColumn("uuid")
   id: string;
-
+  
+  /**
+   * Debe ser un valor de hasta 10 cifras, con dos decimales. 
+   * @example 149.99
+   */
   @Column({
     type: "decimal",
     precision: 10,

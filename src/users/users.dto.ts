@@ -1,4 +1,4 @@
-import { ApiHideProperty, PickType } from "@nestjs/swagger";
+import { ApiHideProperty, ApiProperty, ApiPropertyOptional, PickType } from "@nestjs/swagger";
 import { IsEmail, IsEmpty, IsNotEmpty, IsNumber, IsString, Matches, MaxLength, MinLength, Validate } from "class-validator";
 import { MatchPassword } from "src/decorators/matchPassword.decorators";
 
@@ -84,6 +84,7 @@ export class CreateUserDto {
   @ApiHideProperty()
   @IsEmpty()
   isAdmin?: boolean;
+
 }
 
 export class LoginUserDto extends PickType(CreateUserDto, ['email', 'password']) {}

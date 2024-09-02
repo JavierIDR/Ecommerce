@@ -11,9 +11,17 @@ import { Products } from "./products.entity";
   name: "CATEGORIES",
 })
 export class Categories {
+  /**
+   * Identificador único de la categoría.
+   * uuid v4 generado por la base de datos.
+   */
   @PrimaryGeneratedColumn("uuid")
   id: string;
-
+  
+  /**
+   * Nombre de la categoría, debe ser único y no puede estar vacío.
+   * @example "Smartphones"
+   */
   @Column({
     type: "varchar",
     length: 50,

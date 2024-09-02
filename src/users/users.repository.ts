@@ -16,7 +16,7 @@ export class UsersRepository {
       skip: skip,
     });
 
-    return users.map(({ password, ...rest }) => rest);
+    return users.map(({ password, isAdmin, ...rest }) => rest);
 }
 
   async getUserById(id: string) {
